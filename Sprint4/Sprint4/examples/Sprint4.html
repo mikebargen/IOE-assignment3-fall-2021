@@ -1,0 +1,114 @@
+
+<!-- code from https://github.com/IDMNYU/p5.js-speech/tree/master/examples 
+This code was built off of the 03callbacks examples -->
+
+<html>
+<head>
+	<h1>Sprint4: Speech Output From Buttons </h1>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+	<script src="../lib/p5.speech.js"></script>
+	<script>
+
+	var myVoice = new p5.Speech('Google UK English Male', speechLoaded); // new P5.Speech object
+
+	//myVoice.onLoad = speechLoaded; // could do it this way
+	myVoice.onStart = speechStarted;
+	myVoice.onPause = speechPaused; // not working
+	myVoice.onResume = speechResumed; // not working
+	myVoice.onEnd = speechEnded;
+
+	var lyric = "1";
+	var lyric2 = "2";
+	var lyric3 = "3";
+
+	var speakbutton, speakbutton2, speakbutton3; // UI
+
+	function setup()
+	{
+		createCanvas(400, 400);
+
+		// button:
+		speakbutton = createButton('1');
+  		speakbutton.position(180, 200);
+  		speakbutton.mousePressed(buttonClicked);
+
+		  // button2:
+		speakbutton2 = createButton('2');
+  		speakbutton2.position(720, 200);
+  		speakbutton2.mousePressed(buttonClicked2);
+
+		  // button3:
+		speakbutton3 = createButton('3');
+  		speakbutton3.position(1080, 200);
+  		speakbutton3.mousePressed(buttonClicked3);
+
+	}
+
+	function draw()
+	{
+		// why draw when you can click?
+	}
+
+	function buttonClicked()
+	{
+		if(speakbutton.elt.innerHTML=='1') myVoice.speak(lyric);
+		// else if(speakbutton.elt.innerHTML=='Pause') myVoice.pause(); // not working
+		// else if(speakbutton.elt.innerHTML=='Resume') myVoice.resume(); // not working
+		// else if(speakbutton.elt.innerHTML=='Stop') myVoice.stop();
+	}
+
+	function buttonClicked2()
+	{
+		if(speakbutton2.elt.innerHTML=='2') myVoice.speak(lyric2);
+		// else if(speakbutton.elt.innerHTML=='Pause') myVoice.pause(); // not working
+		// else if(speakbutton.elt.innerHTML=='Resume') myVoice.resume(); // not working
+		// else if(speakbutton.elt.innerHTML=='Stop') myVoice.stop();
+	}
+
+	function buttonClicked3()
+	{
+		
+		if(speakbutton3.elt.innerHTML=='3') myVoice.speak(lyric3);
+		// else if(speakbutton.elt.innerHTML=='Pause') myVoice.pause(); // not working
+		// else if(speakbutton.elt.innerHTML=='Resume') myVoice.resume(); // not working
+		// else if(speakbutton.elt.innerHTML=='Stop') myVoice.stop();
+	}
+
+	function speechLoaded()
+	{
+  		// say cheers:
+		myVoice.speak("testing one two three!!!");
+	}
+
+	function speechStarted()
+	{
+		
+		speakbutton.elt.innerHTML = 'Stop';
+	}
+
+	// not working...
+	function speechPaused()
+	{
+		
+		speakbutton.elt.innerHTML = 'Resume';
+	}
+
+	// not working...
+	function speechResumed()
+	{
+		
+		speakbutton.elt.innerHTML = 'Pause';
+	}
+
+	function speechEnded()
+	{
+		
+		speakbutton.elt.innerHTML = '1';
+	}
+
+</script>
+</head>
+<body>
+</body>
+</html>
